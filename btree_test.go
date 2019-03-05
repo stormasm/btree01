@@ -19,11 +19,11 @@ import (
 	"fmt"
 	"math/rand"
 //	"os"
-//	"reflect"
+  "reflect"
 //	"sort"
 //	"strings"
 //	"sync"
-//	"testing"
+  "testing"
 	"time"
 )
 
@@ -79,9 +79,19 @@ var btreeDegree = flag.Int("degree", 3, "B-Tree degree")
 
 // Test goes here !
 
-
-
-
+func TestDeleteMin(t *testing.T) {
+	tr := New(3, nil)
+	for _, v := range perm(100) {
+		tr.ReplaceOrInsert(v)
+	}
+	var got []Item
+	for v := tr.DeleteMin(); v != nil; v = tr.DeleteMin() {
+		got = append(got, v)
+	}
+	if want := rang(100); !reflect.DeepEqual(got, want) {
+		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
+	}
+}
 
 type byInts []Item
 
