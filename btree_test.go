@@ -18,12 +18,12 @@ import (
 	"flag"
 	"fmt"
 	"math/rand"
-//	"os"
-//	"reflect"
-//	"sort"
-//	"strings"
-//	"sync"
-  "testing"
+	//	"os"
+	//	"reflect"
+	//	"sort"
+	//	"strings"
+	//	"sync"
+	"testing"
 	"time"
 )
 
@@ -95,12 +95,26 @@ func (a byInts) Swap(i, j int) {
 
 func TestAscendRange(t *testing.T) {
 	tr := New(2, nil)
-	for _, v := range rang(18) {
+	for _, v := range rang(10) {
+		tr.ReplaceOrInsert(v)
+	}
+	fmt.Println("-----------------------------------")
+	var got []Item
+	tr.AscendRange(Int(1), Int(5), func(a Item) bool {
+		got = append(got, a)
+		fmt.Println(a)
+		return true
+	})
+}
+
+/*
+func TestAscendRange(t *testing.T) {
+	tr := New(3, nil)
+	for _, v := range rang(100) {
 		tr.ReplaceOrInsert(v)
 	}
 }
 
-/*
 func TestDeleteMin(t *testing.T) {
 	tr := New(3, nil)
 
