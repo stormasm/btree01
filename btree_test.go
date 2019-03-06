@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"math/rand"
 //	"os"
-  "reflect"
+	"reflect"
 //	"sort"
 //	"strings"
 //	"sync"
@@ -77,22 +77,6 @@ func allrev(t *BTree) (out []Item) {
 
 var btreeDegree = flag.Int("degree", 3, "B-Tree degree")
 
-// Test goes here !
-
-func TestDeleteMin(t *testing.T) {
-	tr := New(3, nil)
-	for _, v := range perm(100) {
-		tr.ReplaceOrInsert(v)
-	}
-	var got []Item
-	for v := tr.DeleteMin(); v != nil; v = tr.DeleteMin() {
-		got = append(got, v)
-	}
-	if want := rang(100); !reflect.DeepEqual(got, want) {
-		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
-	}
-}
-
 type byInts []Item
 
 func (a byInts) Len() int {
@@ -105,4 +89,43 @@ func (a byInts) Less(i, j int) bool {
 
 func (a byInts) Swap(i, j int) {
 	a[i], a[j] = a[j], a[i]
+}
+
+// Test goes here !
+
+/*
+func TestDeleteMin(t *testing.T) {
+	tr := New(3, nil)
+
+	for _, v := range perm(10) {
+		tr.ReplaceOrInsert(v)
+		fmt.Println(tr)
+	}
+}
+*/
+
+func TestAscendRange(t *testing.T) {
+	tr := New(2, nil)
+	for _, v := range perm(100) {
+		tr.ReplaceOrInsert(v)
+	}
+	var got []Item
+	tr.AscendRange(Int(40), Int(60), func(a Item) bool {
+		got = append(got, a)
+		return true
+	})
+	if want := rang(100)[40:60]; !reflect.DeepEqual(got, want) {
+		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
+	}
+	got = got[:0]
+	tr.AscendRange(Int(40), Int(60), func(a Item) bool {
+		if a.(Int) > 50 {
+			return false
+		}
+		got = append(got, a)
+		return true
+	})
+	if want := rang(100)[40:51]; !reflect.DeepEqual(got, want) {
+		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
+	}
 }

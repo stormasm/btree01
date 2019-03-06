@@ -698,15 +698,11 @@ func TestCursor(t *testing.T) {
 
 	var a []string
 	c := tr.Cursor()
-
 	for item := c.First(); item != nil; item = c.Next() {
 		a = append(a, fmt.Sprintf("%v", item))
 	}
 	x := strings.Join(a, ",")
-
-/*
-  e := "0,2,4,6,8,10,12,14,16,18"
-
+	e := "0,2,4,6,8,10,12,14,16,18"
 	if x != e {
 		t.Fatal("expected '%v', got '%v'", e, x)
 	}
@@ -721,7 +717,6 @@ func TestCursor(t *testing.T) {
 	if x != e {
 		t.Fatal("expected '%v', got '%v'", e, x)
 	}
-*/
 
 	for i := 0; i < 20; i++ {
 		c = tr.Cursor()
