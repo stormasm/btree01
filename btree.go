@@ -677,8 +677,10 @@ func (t *BTree) ReplaceOrInsert(item Item) Item {
 			t.root = t.cow.newNode()
 			t.root.items = append(t.root.items, item2)
 			t.root.children = append(t.root.children, oldroot, second)
+			fmt.Println("ReplaceOrInsert length =",len(t.root.children), "cap =",cap(t.root.children))
 		}
 	}
+	fmt.Println("Item =",item)
 	out := t.root.insert(item, t.maxItems(), t.ctx)
 	if out == nil {
 		t.length++

@@ -19,7 +19,7 @@ import (
 	"fmt"
 	"math/rand"
 //	"os"
-	"reflect"
+//	"reflect"
 //	"sort"
 //	"strings"
 //	"sync"
@@ -93,6 +93,13 @@ func (a byInts) Swap(i, j int) {
 
 // Test goes here !
 
+func TestAscendRange(t *testing.T) {
+	tr := New(2, nil)
+	for _, v := range perm(10) {
+		tr.ReplaceOrInsert(v)
+	}
+}
+
 /*
 func TestDeleteMin(t *testing.T) {
 	tr := New(3, nil)
@@ -102,7 +109,6 @@ func TestDeleteMin(t *testing.T) {
 		fmt.Println(tr)
 	}
 }
-*/
 
 func TestAscendRange(t *testing.T) {
 	tr := New(2, nil)
@@ -129,3 +135,4 @@ func TestAscendRange(t *testing.T) {
 		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
 	}
 }
+*/
