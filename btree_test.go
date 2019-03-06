@@ -95,7 +95,7 @@ func (a byInts) Swap(i, j int) {
 
 func TestAscendRange(t *testing.T) {
 	tr := New(2, nil)
-	for _, v := range perm(10) {
+	for _, v := range rang(18) {
 		tr.ReplaceOrInsert(v)
 	}
 }
