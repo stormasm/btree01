@@ -307,25 +307,10 @@ func (n *node) maybeSplitChild(i, maxItems int) bool {
 	return true
 }
 
-func (n *node) printChildren(item Item) bool {
-		fmt.Println("insert: item ",item, "numofchildren=",len(n.children))
-		return true
-}
-
-
 // insert inserts an item into the subtree rooted at this node, making sure
 // no nodes in the subtree exceed maxItems items.  Should an equivalent item be
 // be found/replaced by insert, it will be returned.
 func (n *node) insert(item Item, maxItems int, ctx interface{}) Item {
-
-	if (len(n.items) > 1) {
-		fmt.Println("insert: item ",item, "length=",len(n.items))
-	}
-
-	if len(n.children) > 0 {
-		n.printChildren(item)
-	}
-
 	i, found := n.items.find(item, ctx)
 	if found {
 		out := n.items[i]
@@ -692,8 +677,10 @@ func (t *BTree) ReplaceOrInsert(item Item) Item {
 			t.root = t.cow.newNode()
 			t.root.items = append(t.root.items, item2)
 			t.root.children = append(t.root.children, oldroot, second)
+			fmt.Println("ReplaceOrInsert length =",len(t.root.children), "cap =",cap(t.root.children))
 		}
 	}
+	fmt.Println("Item =",item)
 	out := t.root.insert(item, t.maxItems(), t.ctx)
 	if out == nil {
 		t.length++
