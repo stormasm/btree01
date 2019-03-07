@@ -94,17 +94,20 @@ func (a byInts) Swap(i, j int) {
 // Test goes here !
 
 func TestAscendRange(t *testing.T) {
-	tr := New(3, nil)
+	tr := New(4, nil)
 	for _, v := range rang(10) {
 		tr.ReplaceOrInsert(v)
 	}
+	fmt.Println("Number of Items =",tr.length)
 //fmt.Println("-----------------------------------")
+/*
 	var got []Item
-	tr.AscendRange(Int(1), Int(5), func(a Item) bool {
+	tr.AscendRange(Int(0), Int(10), func(a Item) bool {
 		got = append(got, a)
 		// fmt.Println(a)
 		return true
 	})
+*/
 }
 
 /*

@@ -657,6 +657,7 @@ func (t *BTree) minItems() int {
 func (c *copyOnWriteContext) newNode() (n *node) {
 	n = c.freelist.newNode()
 	n.cow = c
+	fmt.Println("cow newNode was called")
 	return
 }
 
