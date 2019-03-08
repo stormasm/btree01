@@ -309,26 +309,6 @@ func (n *node) maybeSplitChild(i, maxItems int) bool {
 	return true
 }
 
-func (n *node) createNodeName() string {
-	num := len(n.items)
-	itemNames := make([]string, num)
-	for i := 0; i < num; i++ {
-		item := n.items[i]
-		itemName := item.(Int)
-		itemNameStr := fmt.Sprintf("%d", itemName)
-		itemNames[i] = itemNameStr
-	}
-	itemNamesStr := strings.Join(itemNames, "-")
-	return itemNamesStr
-}
-
-func (n *node) printChildren(item Item) bool {
-	fmt.Println("insert: item ", item, "numofchildren=", len(n.children))
-	nodeName := n.createNodeName()
-	fmt.Println("node name =", nodeName)
-	return true
-}
-
 // insert inserts an item into the subtree rooted at this node, making sure
 // no nodes in the subtree exceed maxItems items.  Should an equivalent item be
 // be found/replaced by insert, it will be returned.
