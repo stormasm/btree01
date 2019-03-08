@@ -506,10 +506,6 @@ const (
 // "greaterThan" or "lessThan" queries.
 func (n *node) iterate(dir direction, start, stop Item, includeStart bool, hit bool, iter ItemIterator, ctx interface{}) (bool, bool) {
 	var ok bool
-	if len(n.children) > 0 {
-		fmt.Println("method: iterate()")
-		n.printChildren()
-	}
 	switch dir {
 	case ascend:
 		for i := 0; i < len(n.items); i++ {
@@ -564,6 +560,7 @@ func (n *node) iterate(dir direction, start, stop Item, includeStart bool, hit b
 			}
 		}
 	}
+	n.printChildren()
 	return hit, true
 }
 
@@ -646,7 +643,7 @@ func (t *BTree) minItems() int {
 func (c *copyOnWriteContext) newNode() (n *node) {
 	n = c.freelist.newNode()
 	n.cow = c
-	fmt.Println("c *copyOnWriteContext newNode() was called")
+	fmt.Println("cow newNode()")
 	return
 }
 
