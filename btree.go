@@ -50,6 +50,7 @@ package btree
 import (
 	"fmt"
 	"io"
+//	"strconv"
 	"strings"
 	"sync"
 )
@@ -307,9 +308,24 @@ func (n *node) maybeSplitChild(i, maxItems int) bool {
 	return true
 }
 
+func (n *node) createNodeName() string {
+	var num = len(n.items)
+
+  itemNames := make([]Int, num)
+
+	// var itemNames = [num]string
+	for i := 0; i < len(n.items); i++ {
+		item := n.items[i]
+		itemNames[i] = item.(Int)
+	}
+	fmt.Println("socorro",itemNames)
+	return "why"
+}
+
 func (n *node) printChildren(item Item) bool {
-		fmt.Println("insert: item ",item, "numofchildren=",len(n.children))
-		return true
+	fmt.Println("insert: item ",item, "numofchildren=",len(n.children))
+	n.createNodeName()
+	return true
 }
 
 

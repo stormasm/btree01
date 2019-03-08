@@ -95,7 +95,7 @@ func (a byInts) Swap(i, j int) {
 
 func TestAscendRange(t *testing.T) {
 	tr := New(4, nil)
-	for _, v := range rang(10) {
+	for _, v := range rang(20) {
 		tr.ReplaceOrInsert(v)
 	}
 	fmt.Println("Number of Items =",tr.length)
