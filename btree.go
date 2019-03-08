@@ -310,35 +310,22 @@ func (n *node) maybeSplitChild(i, maxItems int) bool {
 }
 
 func (n *node) createNodeName() string {
-	var num = len(n.items)
-
+	num := len(n.items)
 	itemNames := make([]string, num)
-
-	// var itemNames = [num]string
-	for i := 0; i < len(n.items); i++ {
+	for i := 0; i < num; i++ {
 		item := n.items[i]
 		itemName := item.(Int)
-
-		//		itemNameStr := strconv.Itoa(itemName)
-		//		itemNameStr := strconv.FormatInt(itemName,10)
-
 		itemNameStr := fmt.Sprintf("%d", itemName)
-		//fmt.Println("good",reflect.TypeOf(itemNameStr))
-
-		//		fmt.Println(reflect.TypeOf(item))
-		//		fmt.Println(reflect.TypeOf(itemName))
-
 		itemNames[i] = itemNameStr
 	}
-	socorro := strings.Join(itemNames, "-")
-	//fmt.Println("socorro",itemNames[0:num])
-	fmt.Println(socorro)
-	return "why"
+	itemNamesStr := strings.Join(itemNames, "-")
+	return itemNamesStr
 }
 
 func (n *node) printChildren(item Item) bool {
 	fmt.Println("insert: item ", item, "numofchildren=", len(n.children))
-	n.createNodeName()
+	nodeName := n.createNodeName()
+	fmt.Println("node name =", nodeName)
 	return true
 }
 
