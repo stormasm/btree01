@@ -99,7 +99,9 @@ func TestAscendRange(t *testing.T) {
 		tr.ReplaceOrInsert(v)
 	}
 	fmt.Println("Number of Items =",tr.length)
-//fmt.Println("-----------------------------------")
+	fmt.Println("-----------------------------------")
+	result := all(tr)
+	fmt.Println(result)
 /*
 	var got []Item
 	tr.AscendRange(Int(0), Int(10), func(a Item) bool {
