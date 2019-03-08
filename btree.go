@@ -521,6 +521,9 @@ const (
 // "greaterThan" or "lessThan" queries.
 func (n *node) iterate(dir direction, start, stop Item, includeStart bool, hit bool, iter ItemIterator, ctx interface{}) (bool, bool) {
 	var ok bool
+	if len(n.children) > 0 {
+		fmt.Println("Process next level...")
+	}
 	switch dir {
 	case ascend:
 		for i := 0; i < len(n.items); i++ {
