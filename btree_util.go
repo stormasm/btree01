@@ -18,8 +18,8 @@ func (n *node) createNodeName() string {
 	return itemNamesStr
 }
 
-func (n *node) printChildren(item Item) bool {
-	fmt.Println("insert: item ", item, "numofchildren=", len(n.children))
+func (n *node) printChildren() bool {
+	fmt.Println("numofchildren=", len(n.children))
 	nodeName := n.createNodeName()
 	fmt.Println("node name =", nodeName)
 	return true

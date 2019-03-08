@@ -311,15 +311,6 @@ func (n *node) maybeSplitChild(i, maxItems int) bool {
 // no nodes in the subtree exceed maxItems items.  Should an equivalent item be
 // be found/replaced by insert, it will be returned.
 func (n *node) insert(item Item, maxItems int, ctx interface{}) Item {
-
-	if len(n.items) > 1 {
-		fmt.Println("insert: item ", item, "length=", len(n.items))
-	}
-
-	if len(n.children) > 0 {
-		n.printChildren(item)
-	}
-
 	i, found := n.items.find(item, ctx)
 	if found {
 		out := n.items[i]
@@ -516,7 +507,8 @@ const (
 func (n *node) iterate(dir direction, start, stop Item, includeStart bool, hit bool, iter ItemIterator, ctx interface{}) (bool, bool) {
 	var ok bool
 	if len(n.children) > 0 {
-		fmt.Println("Process next level...")
+		fmt.Println("method: iterate()")
+		n.printChildren()
 	}
 	switch dir {
 	case ascend:
@@ -654,7 +646,7 @@ func (t *BTree) minItems() int {
 func (c *copyOnWriteContext) newNode() (n *node) {
 	n = c.freelist.newNode()
 	n.cow = c
-	fmt.Println("cow newNode was called")
+	fmt.Println("c *copyOnWriteContext newNode() was called")
 	return
 }
 
