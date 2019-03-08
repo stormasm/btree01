@@ -18,18 +18,12 @@ import (
 	"flag"
 	"fmt"
 	"math/rand"
-	//	"os"
-	//	"reflect"
-	//	"sort"
-	//	"strings"
-	//	"sync"
 	"testing"
 	"time"
 )
 
 func init() {
 	seed := time.Now().Unix()
-	fmt.Println(seed)
 	rand.Seed(seed)
 }
 
@@ -91,67 +85,13 @@ func (a byInts) Swap(i, j int) {
 	a[i], a[j] = a[j], a[i]
 }
 
-// Test goes here !
-
 func TestAscendRange(t *testing.T) {
 	tr := New(4, nil)
 	for _, v := range rang(20) {
 		tr.ReplaceOrInsert(v)
 	}
-	fmt.Println("Number of Items =",tr.length)
+	fmt.Println("Number of Items =", tr.length)
 	fmt.Println("-----------------------------------")
 	result := all(tr)
 	fmt.Println(result)
-/*
-	var got []Item
-	tr.AscendRange(Int(0), Int(10), func(a Item) bool {
-		got = append(got, a)
-		// fmt.Println(a)
-		return true
-	})
-*/
 }
-
-/*
-func TestAscendRange(t *testing.T) {
-	tr := New(3, nil)
-	for _, v := range rang(100) {
-		tr.ReplaceOrInsert(v)
-	}
-}
-
-func TestDeleteMin(t *testing.T) {
-	tr := New(3, nil)
-
-	for _, v := range perm(10) {
-		tr.ReplaceOrInsert(v)
-		fmt.Println(tr)
-	}
-}
-
-func TestAscendRange(t *testing.T) {
-	tr := New(2, nil)
-	for _, v := range perm(100) {
-		tr.ReplaceOrInsert(v)
-	}
-	var got []Item
-	tr.AscendRange(Int(40), Int(60), func(a Item) bool {
-		got = append(got, a)
-		return true
-	})
-	if want := rang(100)[40:60]; !reflect.DeepEqual(got, want) {
-		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
-	}
-	got = got[:0]
-	tr.AscendRange(Int(40), Int(60), func(a Item) bool {
-		if a.(Int) > 50 {
-			return false
-		}
-		got = append(got, a)
-		return true
-	})
-	if want := rang(100)[40:51]; !reflect.DeepEqual(got, want) {
-		t.Fatalf("ascendrange:\n got: %v\nwant: %v", got, want)
-	}
-}
-*/

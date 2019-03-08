@@ -19,8 +19,7 @@ func (n *node) createNodeName() string {
 }
 
 func (n *node) printChildren() bool {
-	fmt.Println("numofchildren=", len(n.children))
 	nodeName := n.createNodeName()
-	fmt.Println("node name =", nodeName)
+	fmt.Println("node name =", nodeName, ":: numofchildren =", len(n.children))
 	return true
 }
