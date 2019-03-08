@@ -50,7 +50,8 @@ package btree
 import (
 	"fmt"
 	"io"
-//	"strconv"
+	//	"reflect"
+	//  "strconv"
 	"strings"
 	"sync"
 )
@@ -311,31 +312,43 @@ func (n *node) maybeSplitChild(i, maxItems int) bool {
 func (n *node) createNodeName() string {
 	var num = len(n.items)
 
-  itemNames := make([]Int, num)
+	itemNames := make([]string, num)
 
 	// var itemNames = [num]string
 	for i := 0; i < len(n.items); i++ {
 		item := n.items[i]
-		itemNames[i] = item.(Int)
+		itemName := item.(Int)
+
+		//		itemNameStr := strconv.Itoa(itemName)
+		//		itemNameStr := strconv.FormatInt(itemName,10)
+
+		itemNameStr := fmt.Sprintf("%d", itemName)
+		//fmt.Println("good",reflect.TypeOf(itemNameStr))
+
+		//		fmt.Println(reflect.TypeOf(item))
+		//		fmt.Println(reflect.TypeOf(itemName))
+
+		itemNames[i] = itemNameStr
 	}
-	fmt.Println("socorro",itemNames)
+	socorro := strings.Join(itemNames, "-")
+	//fmt.Println("socorro",itemNames[0:num])
+	fmt.Println(socorro)
 	return "why"
 }
 
 func (n *node) printChildren(item Item) bool {
-	fmt.Println("insert: item ",item, "numofchildren=",len(n.children))
+	fmt.Println("insert: item ", item, "numofchildren=", len(n.children))
 	n.createNodeName()
 	return true
 }
-
 
 // insert inserts an item into the subtree rooted at this node, making sure
 // no nodes in the subtree exceed maxItems items.  Should an equivalent item be
 // be found/replaced by insert, it will be returned.
 func (n *node) insert(item Item, maxItems int, ctx interface{}) Item {
 
-	if (len(n.items) > 1) {
-		fmt.Println("insert: item ",item, "length=",len(n.items))
+	if len(n.items) > 1 {
+		fmt.Println("insert: item ", item, "length=", len(n.items))
 	}
 
 	if len(n.children) > 0 {
